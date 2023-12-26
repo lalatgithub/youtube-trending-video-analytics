@@ -1,4 +1,4 @@
-from .orm.database import SessionLocal, engine
+from .orm.database import SessionLocal
 
 
 def get_db():

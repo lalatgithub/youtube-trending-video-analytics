@@ -7,7 +7,7 @@ from datetime import datetime
 log = logging.getLogger(__file__)
 
 
-def load_youtube_analytics_into_db(db_conn):
+def load_from_dataframe_into_db(db_conn):
     log.info('Loading YouTube analytics into database. Hold on...')
 
     df = pd.read_csv('./dataset/USvideos.csv')
