@@ -1,0 +1,26 @@
+steps:
+- id: 'build-Docker-image'
+  name: gcr.io/cloud-builders/docker
+  args:
+      - build
+      - -t
+      - gcr.io/$PROJECT_ID/analytics:$COMMIT_SHA
+      - -t
+      - gcr.io/$PROJECT_ID/analytics:latest
+      - .
+- id: 'push-Docker-image-to-GCR'
+  name: gcr.io/cloud-builders/docker
+  args:
+      - push
+      - -a
+      - gcr.io/$PROJECT_ID/analytics
+- id: 'push-release-to-GKE-using-Helm'
+  name: gcr.io/$PROJECT_ID/helm
+  args: ['upgrade', '--install', 'analytics', './helm']
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=us-east1-a'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=analytics-production'
+images:
+  - gcr.io/$PROJECT_ID/analytics:$COMMIT_SHA
+  - gcr.io/$PROJECT_ID/analytics:latest
+timeout: 10m

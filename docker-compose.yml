@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  analytics:
+    container_name: youtube_analytics
+    image: youtube_analytics
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+      - "${JUPYTER_PORT}:${JUPYTER_PORT}"
+    env_file:
+      - .env

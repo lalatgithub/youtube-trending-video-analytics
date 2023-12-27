@@ -1,0 +1,10 @@
+name: youtube-analytics
+app_port: 8000
+jupyter_port: 8888
+resources:
+  requests:
+    cpu: "0.5"
+    memory: "1G"
+  limits:
+    cpu: "2"
+    memory: "4G"

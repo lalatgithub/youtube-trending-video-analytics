@@ -1,13 +1,17 @@
 import json
 import logging
 import pandas as pd
-from datetime import datetime 
+from datetime import datetime
 
+from app.orm.database import engine
 
 log = logging.getLogger(__file__)
 
 
-def load_from_dataframe_into_db(db_conn):
+def load_from_dataframe_into_db():
+
+    db_conn = engine.connect()
+
     log.info('Loading YouTube analytics into database. Hold on...')
 
     df = pd.read_csv('./dataset/USvideos.csv')
